@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center">
+    <div class="spinner-border text-dark" role="status" *ngIf="isLoaded">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <table class="table table-striped table-hover" *ngIf="!isLoaded">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Comments </th>
+                <th scope="col">Rating</th>
+                <th scope="col">Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of loadedItems, let i = index">
+                <th scope="row"> <a href="{{ item.url }}" class="text-decoration-none"> {{ item.title }} </a></th>
+                <th scope="row" style="cursor: pointer;" (click)="onReadComments()" routerLink="/comments"> {{
+                    item.num_comments }} </th>
+                <th scope="row"> {{ item.points }} </th>
+                <th scope="row"> {{ item.author }} </th>
+            </tr>
+        </tbody>
+        <mat-paginator #paginator class="demo-paginator" (page)="onHandlePageEvent($event)" [length]="length"
+            [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 25]" [hidePageSize]="false"
+            [pageIndex]="pageIndex" aria-label="Select page">
+        </mat-paginator>
+    </table>
+</div>
